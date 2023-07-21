@@ -1,0 +1,44 @@
+name: PR Release Comment
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Comment on PRs
+      uses: actions/github-script@v4
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      with:
+        github-token: ${{ secrets.GH_TOKEN }}
+        script: |
+          const newTag = '${{ github.ref.replace('refs/tags/', '') }}';
+
+          async function run() {
+            const { data: release } = await github.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: newTag
+            });
+          
+            const prNumbers = release.body.match(/\(#(\d+)\)/g).map(match => match.replace(/\D/g, ''));
+          
+            for (const prNumber of prNumbers) {
+              await github.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: `This PR has been included in release: ${newTag}, see the [release notes](https://github.com/${{ github.repository }}/releases/tag/${newTag}).`
+              });
+            }
+          }
+          
+          run();
