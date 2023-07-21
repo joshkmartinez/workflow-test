@@ -8,8 +8,7 @@ module.exports = async ({github, context, core}) => {
   const release = releases.data.find((rel) => rel.tag_name === newTag);
 
   if (!release) {
-    console.log(`Release not found for tag ${newTag}`);
-    return;
+    core.setFailed(`Release not found for tag ${newTag}`);
   }
 
   const prNumbers = release.body.match(/#(\d+)/g).map((match) => match.replace(/\D/g, ''));
@@ -23,7 +22,8 @@ module.exports = async ({github, context, core}) => {
         body: `This PR has been included in release: ${newTag}, see the [release notes](https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${newTag}).`,
       });
     } catch (error) {
-      core.setFailed(`Failed to comment on PR #${prNumber}: `, error);
+      console.error(error);
+      core.setFailed(`Failed to comment on PR #${prNumber}: `);
     }
   }
 }
