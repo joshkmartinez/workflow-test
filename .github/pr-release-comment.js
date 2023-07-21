@@ -12,7 +12,7 @@ module.exports = async ({github, context, core}) => {
     return;
   }
 
-  const prNumbers = release.body.match(/\(#(\d+)\)/g).map((match) => match.replace(/\D/g, ''));
+  const prNumbers = release.body.match(/#(\d+)/g).map((match) => match.replace(/\D/g, ''));
 
   for (const prNumber of prNumbers) {
     try {
