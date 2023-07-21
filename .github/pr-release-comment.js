@@ -16,14 +16,14 @@ module.exports = async ({github, context, core}) => {
 
   for (const prNumber of prNumbers) {
     try {
-      await github.issues.createComment({
+      await github.rest.issues.createComment({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: prNumber,
         body: `This PR has been included in release: ${newTag}, see the [release notes](https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${newTag}).`,
       });
     } catch (error) {
-      console.error(`Failed to comment on PR #${prNumber}: `, error);
+      core.setFailed(`Failed to comment on PR #${prNumber}: `, error);
     }
   }
 }
