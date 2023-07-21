@@ -5,7 +5,7 @@ module.exports = async ({github, context, core}) => {
     repo: context.repo.repo,
   });
 
-  const release = releases.find((rel) => rel.tag_name === newTag);
+  const release = releases.data.find((rel) => rel.tag_name === newTag);
 
   if (!release) {
     console.log(`Release not found for tag ${newTag}`);
