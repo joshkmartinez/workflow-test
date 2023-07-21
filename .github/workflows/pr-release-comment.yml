@@ -11,14 +11,11 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Comment on PRs
-      uses: actions/github-script@v4
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      uses: actions/github-script@v6
       with:
-        github-token: ${{ secrets.GH_TOKEN }}
         script: |
           const commentOnPRs = require('./prReleaseComment');
           commentOnPRs(github, context);
