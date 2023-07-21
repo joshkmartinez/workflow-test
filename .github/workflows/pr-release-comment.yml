@@ -17,5 +17,5 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const commentOnPRs = require('./prReleaseComment');
+          const commentOnPRs = require('./.github/prReleaseComment');
           commentOnPRs(github, context);
