@@ -1,9 +1,9 @@
-async function commentOnPRs(github, context) {
+module.exports = async ({github, context, core}) => {
   const newTag = context.ref.replace('refs/tags/', '');
-  const releases = await github.paginate(github.repos.listReleases.endpoint.merge({
+  const releases = await github.rest.repos.listReleases({
     owner: context.repo.owner,
     repo: context.repo.repo,
-  }));
+  });
 
   const release = releases.find((rel) => rel.tag_name === newTag);
 
