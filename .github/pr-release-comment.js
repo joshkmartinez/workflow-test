@@ -27,5 +27,3 @@ module.exports = async ({github, context, core}) => {
     }
   }
 }
-
-module.exports = commentOnPRs;
