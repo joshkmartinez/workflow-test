@@ -18,4 +18,4 @@ jobs:
       with:
         script: |
           const commentOnPRs = require('./.github/pr-release-comment');
-          commentOnPRs(github, context, core);
+          commentOnPRs({github, context, core});
