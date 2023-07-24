@@ -45,4 +45,11 @@ jobs:
         with:
           node-version: 16
       - run: npm install -g @lhci/cli@0.11.x
-      - run: lhci autorun --upload.target=temporary-public-storage --collect.url=https://www.napari-hub.org/ # TODO: eventually upload to artifacts?
+      - name: Run Lighthouse
+        run: lhci autorun --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci
+  
+      - name: Upload Lighthouse reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: lighthouse-reports
+          path: ./.lighthouseci/
