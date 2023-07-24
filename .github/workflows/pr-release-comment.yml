@@ -47,7 +47,7 @@ jobs:
           node-version: 16
       - run: npm install -g @lhci/cli@0.11.x
       - name: Run Lighthouse
-        run: lhci autorun --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci
+        run: lhci autorun -no-lighthouserc --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci
   
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v2
