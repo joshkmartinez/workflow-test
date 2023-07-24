@@ -2,10 +2,8 @@ name: Release Test & Notify
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - "v*"
+      tags:
+        - "v*"
 
 jobs:
   pr-release-comment:
