@@ -29,15 +29,7 @@ jobs:
         with:
           payload: |
             {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*${{ github.ref_name }}* of napari-hub.org has been released. Please check the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
-                  }
-                }
-              ]
+              "text": "*${{ github.ref_name }}* of napari-hub.org has been released. Please check the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
