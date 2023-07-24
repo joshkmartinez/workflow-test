@@ -29,7 +29,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "*${{ github.ref_name }}* of napari-hub.org has been released. Please check the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
+              "text": "*${{ github.ref_name }} of napari-hub.org has been released.* See the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
@@ -44,7 +44,7 @@ jobs:
           node-version: 16
       - run: npm install -g @lhci/cli@0.11.x
       - name: Run Lighthouse
-        run: lhci autorun --no-lighthouserc --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci
+        run: lhci autorun --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci --upload.artifacts.ignoreFailure=true
   
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v2
