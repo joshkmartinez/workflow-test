@@ -31,11 +31,10 @@ jobs:
         with:
           payload: |
             {
-              "text": "Version ${GITHUB_REF#refs/tags/} of napari-hub.org has been released. See the release notes https://github.com/${{ github.repository }}/releases/tag/${GITHUB_REF#refs/tags/} for more information."
+              "text": "Version ${{ github.ref_name }} of napari-hub.org has been released. Please check the release notes https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }} for more information:"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          GITHUB_REF: ${{ github.ref }}
   
   lighthouse-ci:  # TODO: test then move to deploy.yml
     runs-on: ubuntu-latest
