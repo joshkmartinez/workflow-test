@@ -29,7 +29,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "*${{ github.ref_name }} of napari-hub.org has been released.* See the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
+              "text": "${{ github.ref_name }} of napari-hub.org has been released. See the <https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}|release notes> for more information."
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
@@ -47,7 +47,7 @@ jobs:
         run: lhci autorun --collect.url=https://www.napari-hub.org/ --output-dir=./.lighthouseci --upload.artifacts.ignoreFailure=true
   
       - name: Upload Lighthouse reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: lighthouse-reports
           path: ./.lighthouseci/
