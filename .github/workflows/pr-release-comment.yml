@@ -31,6 +31,7 @@ jobs:
         with:
           payload: |
             {
+              "type": "mrkdwn",
               "text": "${{ github.ref_name }} of napari-hub.org has been released. Please check the [release notes](https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}) for more information:"
             }
         env:
